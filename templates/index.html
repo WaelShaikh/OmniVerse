@@ -1,0 +1,358 @@
+<html>
+    <head>
+        <title>OmniVerse</title>
+
+        <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet"0>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script> -->
+
+        <link rel="stylesheet" href="static/material-components-web.min.css">
+        <script src="static/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="static/MaterialIcons.css">
+        <link rel="stylesheet" href="static/MaterialSymbols.css">
+        <link rel="stylesheet" href="static/NotoSansMono.css">
+        <script src="static/socket.io.min.js"></script>
+        <link rel="stylesheet" href="static/style.css">
+        <link rel="icon" href="static/sparkles.png">
+
+        <style>
+            * {
+                cursor:none;
+            }
+
+            #main {
+                /* background-image:  linear-gradient(#d2d2d2 1px, transparent 1px), linear-gradient(to right, #d2d2d2 1px, #FFF 1px); */
+                background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC") repeat 0 0;
+                background-size: 30px 30px;
+                animation: animatedBackground 300000s linear infinite;
+                background-repeat: repeat;
+            }
+            
+            @media (prefers-color-scheme: dark) {
+                #main {
+                    background-color: #000;
+                    /* background-image:  linear-gradient(#2d2d2d 1px, transparent 1px), linear-gradient(to right, #2d2d2d 1px, #000 1px); */
+                    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuElEQVRoBe3awQ2CQABEUbUEbJEEi5ISpQVETuY38LPkk5gwp9mdx9H7srz2dX3fpul5G/XZts959H2e5/14G/Z3nv+QGPYC/+M/Rv2ceO4uwkXsnIgtwP5EuIidE7EF2J8IF7FzIrYA+xPhInZOxBZgfyJcxM6J2ALsT4SL2DkRW4D9iXAROydiC7A/ES5i50RsAfYnwkXsnIgtwP5EuIidE7EF2J8IF7FzIrYA+y8j8rvYJf6v9QVf2KG69fWg3gAAAABJRU5ErkJggg==") repeat 0 0;
+                    background-size: 30px 30px;
+                    animation: animatedBackground 300000s linear infinite;
+                    background-repeat: repeat;
+                }
+            }
+        </style>
+        <!-- <script src="static/app.js"></script> -->
+        <!-- <style>
+            * {
+                font-family: "Noto Sans Mono", monospace;
+                font-optical-sizing: auto;
+                font-style: normal;
+                /* font-weight: <100-900>;
+                font-variation-settings: "wdth" <0-100>; */
+            }
+
+            html, body, #app {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                /* background-color: #222222; */
+                background-color: #EEEEEE;
+            }
+
+            #app {
+                display: flex;
+            }
+
+            #main {
+                /* position: fixed; */
+                /* top: 0; */
+                height: 100%;
+                /* width: 75%; */
+                /* border-radius: 50px 0 0 50px;
+                border-radius: 7vh 0 0 7vh; */
+                flex-grow: 1;
+                background-color: #FFFFFF;
+                overflow: hidden;
+                padding: 0;
+            }
+
+            .mainScreen {
+                height: 100%;
+                width: 100%;
+                /* background-color: red; */
+            }
+
+            #homeScreen {
+                /* text-align: center; */
+                padding: 0;
+                margin: none;
+                position: fixed;
+                top: 0;
+            }
+
+            #logo {
+                position: relative;
+                text-align: center;
+                scale: 400%;
+                top: 20%;
+
+                /* left: 50%; */
+                /* transform: translateX(-50%); */
+                animation-name: logo-anim;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+            }
+
+            @keyframes logo-anim {
+                from {top: 23%;}
+                to {top: 20%;}
+            }
+
+            #cards {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content:space-around ;
+                /* background-color: red; */
+                text-align: center;
+                margin-bottom: 50px;
+                flex-direction: row;
+                position: relative;
+                top: 50%;
+
+                /* display: grid;
+                grid-auto-flow: column;
+                place-content: center; */
+                animation-name: cards-anim;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+            }
+
+            @keyframes cards-anim {
+                from {opacity: 0}
+                to {opacity: 1}
+            }
+
+            .card {
+                background-color: #EEEEEE;
+                height: auto;
+                width: auto;
+
+                /* display: grid; */
+                /* margin: 1px; */
+                /* padding:auto; */
+                /* margin: auto; */
+                /* margin: 1rem; */
+                /* margin: 1rem; */
+                padding: 3rem;
+                border-radius: 1rem;
+                transition-duration: 0.25s;
+            }
+
+            .card:hover {
+                transform: translateY(-10px);
+                /* background-color: #F9C23C; */
+                /* border: 5px solid #F9C23C; */
+                color: #F9C23C;
+            }
+
+            .card-icon {
+                font-size: 400%;
+            }
+
+            .card-text {
+                font-size: 30px;
+            }
+
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+
+
+            /* width */
+            ::-webkit-scrollbar {
+            width: 10px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            background: #ffffff;
+            background: #ffffff00;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+            background: #888;
+            background: #aaa;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            }
+
+
+            @media (max-device-width:850px) {
+                .hiddenCard {
+                    display: none;
+                }
+
+                #logo {
+                    scale: 600%;
+                }
+
+                .card {
+                    padding: 4rem;
+                    /* margin: 1px; */
+                    /* padding:auto; */
+                    /* margin: 1rem; */
+                    /* border-radius: 1rem; */
+                    scale: 120%;
+                }
+
+                .card-icon {
+                    font-size: 600%;
+                }
+
+                .card-text {
+                    font-size: 40px;
+                }
+            }
+
+            @media (prefers-color-scheme: dark) {
+                html, body, #app {
+                    background-color: #111111;
+                    color: #FFF;
+                }
+
+                #main {
+                    background-color: #000;
+                }
+
+                .card {
+                    background-color: #111111;
+                    color: #CCC;
+                }
+
+                /* Handle */
+                ::-webkit-scrollbar-thumb {
+                    background: #777;
+                }
+
+                /* Handle on hover */
+                ::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+            }
+
+            
+
+        </style> -->
+    </head>
+    <body>
+        <div id="app">
+
+            <div id="main">
+                <div id="homeScreen" class="mainScreen">
+                    <div id="logo">
+                        <!-- <div style="padding: 0; margin: none; font-size: 200%; font-size: 2vw">✨</div> -->
+                        <!-- <div style="padding: 0; margin: none; font-size: 200%; font-size: 2vw"> -->
+                            <img id="logo-img" src="static/sparkles.png" style="width:3vw;height:3vw">
+                        <!-- </div> -->
+                        <div id="logo-txt" style="padding: 0; margin: none; font-size: 200%; font-size: 2vw"><b>OmniVerse</b></div>
+                    </div>
+
+                    <div id="cards">
+                        <div class="card hiddenCard" style="opacity:0"></div>
+
+                        <a href="/text">
+                            <div class="card" id="text">
+                                <div class="material-symbols-outlined card-icon">
+                                    format_align_left
+                                </div>
+                                <br>
+                                <div class="card-text">Text</div>
+                            </div>
+                        </a>
+
+                        <a href="/image">
+                            <div class="card" id="image">
+                                <div class="material-symbols-outlined card-icon">
+                                    image
+                                </div>
+                                <br>
+                                <div class="card-text">Image</div>
+                            </div>
+                        </a>
+
+                        <a href="/audio">
+                            <div class="card" id="audio">
+                                <div class="material-symbols-outlined card-icon">
+                                    music_note
+                                </div>
+                                <br>
+                                <div class="card-text">Audio</div>
+                            </div>
+                        </a>
+
+                        <div class="card hiddenCard" style="opacity:0"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="custom-cursor">+</div>
+        <script>
+            const cursorSmall = document.querySelector('.custom-cursor');
+            const positionElement = (e)=> {
+                const mouseY = e.clientY;
+                const mouseX = e.clientX;
+                cursorSmall.style.transform = `translate3d(${mouseX-25}px, ${mouseY-25}px, 0)`;
+            }
+            window.addEventListener('mousemove', positionElement)
+        </script>
+
+
+
+        <script>
+            function initMotion() {
+                let constrain = 20;
+                let mouseOverContainer = document.getElementById("app");
+                let logoImg = document.getElementById("logo-img");
+
+                function transforms(x, y, el) {
+                    let box = el.getBoundingClientRect();
+                    let calcX = -(y - box.y - (box.height / 2)) / constrain;
+                    let calcY = (x - box.x - (box.width / 2)) / constrain;
+                    
+                    return "perspective(100px) "
+                        + "   rotateX("+ calcX +"deg) "
+                        + "   rotateY("+ calcY +"deg) ";
+                };
+
+                function transformElement(el, xyEl) {
+                    el.style.transform  = transforms.apply(null, xyEl);
+                }
+
+                mouseOverContainer.onmousemove = function(e) {
+                    let xy = [e.clientX, e.clientY];
+                    let position = xy.concat([logoImg]);
+
+                    window.requestAnimationFrame(function(){
+                        transformElement(logoImg, position);
+                    });
+                };
+            }
+
+            setTimeout(initMotion, 1000);
+
+        </script>
+
+    </body>
+</html>

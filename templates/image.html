@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>OmniVerse</title>
+
+        <!-- <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet"0>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script> -->
+
+        <link rel="stylesheet" href="static/material-components-web.min.css">
+        <script src="static/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="static/MaterialIcons.css">
+        <link rel="stylesheet" href="static/MaterialSymbols.css">
+        <link rel="stylesheet" href="static/NotoSansMono.css">
+        <script src="static/socket.io.min.js"></script>
+        <link rel="stylesheet" href="static/style.css">
+
+        <script src="static/app.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+
+            <div id="sidebar">
+
+                <nav>
+                    <a href="/" style="text-decoration: none;">
+                        <div class="navItem">
+                            <div class="navItemIcon navItemIconLogo">
+                                <!-- <div style="margin:auto auto 0 0;display:block;padding:25%;" class="material-symbols-outlined">
+                                    🌎
+                                </div> -->
+                                <!-- <div style="margin:auto auto 0 0;display:block;padding:25%" class="material-symbols-outlined"> -->
+                                    <!-- ✨ -->
+                                <!-- </div> -->
+                                <img src="static/sparkles.png" style="width:80%;display:block;margin:2px;transform: translate(-50%,-50%);position:relative;left:50%;top:50%">
+                            </div>
+                        </div>
+                    </a>
+                    <!-- <div class="navItemIcon navItemIcon2"></div> -->
+
+                    <a href="/text" style="text-decoration: none;">
+                        <div class="navItem">
+                            <div class="navItemIcon">
+                                <div style="margin:auto auto 0 0;display:block;padding:25%" class="material-symbols-outlined">
+                                    format_align_left
+                                </div>
+                            </div>
+                            <div class="navItemLabel">Text</div>
+                            <!-- <div class="navItemIcon navItemIcon2"></div> -->
+                        </div>
+                    </a>
+
+                    <a href="/image" style="text-decoration: none;">
+                        <div class="navItem">
+                            <div class="navItemIcon">
+                                <div style="margin:auto auto 0 0;display:block;padding:25%" class="material-symbols-outlined">
+                                    image
+                                </div>
+                            </div>
+                            <div class="navItemLabel">Image</div>
+                            <!-- <div class="navItemIcon navItemIcon2"></div> -->
+                        </div>
+                    </a>
+
+                    <a href="/audio" style="text-decoration: none;">
+                        <div class="navItem">
+                            <div class="navItemIcon">
+                                <div style="margin:auto auto 0 0;display:block;padding:25%" class="material-symbols-outlined">
+                                    music_note
+                                </div>
+                            </div>
+                            <div class="navItemLabel">Audio</div>
+                            <!-- <div class="navItemIcon navItemIcon2"></div> -->
+                        </div>
+                    </a>
+
+                </nav>
+                
+
+            </div>
+
+            <div id="main" style="border-radius: 7vh 0 0 7vh;">
+                <div id="textScreen" class="mainScreen hiddenScreen">
+                </div>
+
+                <div id="imageScreen" class="mainScreen">
+                    <div id="generatedImageContainer">
+                        <div id="generatedImage">
+                            <img src="" id="fetchedimg" style="border-radius: 5vh;background-color: green;position: relative;width:100%;height:100%;display:none" class="material-symbols-outlined">
+                            <div id="placeholder" style="font-size: 15vw;opacity: 15%" class="material-symbols-outlined">
+                                image
+                            </div>
+                        </div>
+                    </div>
+                    <form action="" onsubmit="return sendImageInput()" method="POST" id="imageInputForm">
+                        <div id="textInputContainer">
+                            <input id="textInputBox" autocomplete="off"></input>
+                            <button type="submit" id="textInputButton">
+                                <!-- <b>SEND</b> -->
+                                <div class="material-symbols-outlined send-symbol">
+                                    send
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                    <script>
+                        textInputForm = document.getElementById("imageInputForm");
+                        textInputForm.addEventListener("submit", function(event) {
+                            event.preventDefault();
+                        });
+                    </script>
+                </div>
+
+                <div id="audioScreen" class="mainScreen hiddenScreen">
+                    <div id="messagesCarousel">
+
+                    </div>
+                    <div id="textBox">
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="custom-cursor">+</div>
+        <script>
+            const cursorSmall = document.querySelector('.custom-cursor');
+            const positionElement = (e)=> {
+                const mouseY = e.clientY;
+                const mouseX = e.clientX;
+                cursorSmall.style.transform = `translate3d(${mouseX-25}px, ${mouseY-25}px, 0)`;
+            }
+            window.addEventListener('mousemove', positionElement)
+        </script>
+
+    </body>
+</html>
